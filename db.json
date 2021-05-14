@@ -1,0 +1,24 @@
+{
+  "accounts": [
+    {
+      "id": 1,
+      "iban": "DE02300209000106531065",
+      "currency": "EUR",
+      "balance": 10333.65
+    },
+    {
+      "id": 2,
+      "iban": "DE02300209000106531066",
+      "currency": "CHF",
+      "balance": 12566.22
+    }
+  ],
+  "payments": [
+    {
+      "id": 1,
+      "amount": 10,
+      "currency": "EUR",
+      "date": "2021-05-12"
+    }
+  ]
+}

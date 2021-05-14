@@ -1,0 +1,717 @@
+{
+	"info": {
+		"_postman_id": "7a4e6289-12d7-490b-9ff1-7d5b4adf3243",
+		"name": "Kong",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Setup API",
+			"item": [
+				{
+					"name": "Delete Service",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/services/banking-api",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"banking-api"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Route",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/services/banking-api/routes/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"banking-api",
+								"routes",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Service",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"banking-api\",\n    \"url\": \"http://api.modefin.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/services",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Route Accounts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"accounts\",\n    \"paths\": [\n        \"/accounts\"\n    ],\n    \"strip_path\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/services/banking-api/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"banking-api",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Route Payments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"payments\",\n    \"paths\": [\n        \"/payments\"\n    ],\n    \"strip_path\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/services/banking-api/routes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"banking-api",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Upstream",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"api.modefin.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/upstreams",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"upstreams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Target 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"target\": \"192.168.178.24:3000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/upstreams/api.modefin.com/targets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"upstreams",
+								"api.modefin.com",
+								"targets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Target 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"target\": \"192.168.178.24:3001\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/upstreams/api.modefin.com/targets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"upstreams",
+								"api.modefin.com",
+								"targets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Setup Logging",
+			"item": [
+				{
+					"name": "Add File Log Plugin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"file-log\",\n    \"config\": {\n        \"path\": \"/tmp/kong.log\",\n        \"reopen\": false\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/services/banking-api/plugins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"banking-api",
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Setup Users",
+			"item": [
+				{
+					"name": "Create Joe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"joe\",\n    \"custom_id\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/consumers",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"consumers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Groups for Joe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group\": \"readers\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/consumers/joe/acls",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"consumers",
+								"joe",
+								"acls"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Judy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"judy\",\n    \"custom_id\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/consumers",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"consumers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Groups for Judy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"group\": \"writers\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/consumers/judy/acls",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"consumers",
+								"judy",
+								"acls"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Setup ACLs",
+			"item": [
+				{
+					"name": "Add ACLs to payments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"acl\",\n    \"config\": {\n        \"allow\": [\"writers\"]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/routes/payments/plugins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"routes",
+								"payments",
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Setup JWT",
+			"item": [
+				{
+					"name": "Add JWT Plugin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"jwt\",\n    \"config\": {\n        \"secret_is_base64\": false,\n        \"run_on_preflight\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8001/services/banking-api/plugins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"banking-api",
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create JWT for Joe",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8001/consumers/joe/jwt",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"consumers",
+								"joe",
+								"jwt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create JWT for Judy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8001/consumers/judy/jwt",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"consumers",
+								"judy",
+								"jwt"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "Kong running",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JSON Server 1 running",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JSON Server 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts needs authentication",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9obiIsImlzcyI6ImtYYjNTcWc3c2VkckwzSVFnNHphVDVrTVg2THBhUHR2In0.g3XyeQuiT3iCUEnQULmQlwRwG_QwgQg6N4SoRghK88I",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/accounts",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accounts (Joe)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJYRGFNak12c2o0VElCelpTZ2lDeDl3NEtJNkFQQm5XbyJ9.nek9vaRqjfkUkJlq3rv4BYuDgO0mcOQdio1XDobQMCo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9obiIsImlzcyI6ImtYYjNTcWc3c2VkckwzSVFnNHphVDVrTVg2THBhUHR2In0.g3XyeQuiT3iCUEnQULmQlwRwG_QwgQg6N4SoRghK88I",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/accounts",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payments (Judy)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJNSnFnY3puZmxCSjFvNjdQeTZMSVRDcmtyZldrU0tCeiJ9.eQ3koLRqA27JjDJc3gsubzaBea5NCgoJkEDtwxY4Bs4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9obiIsImlzcyI6InNuSnYyZDAyTGx2NnJjYkk3dEpSend3SDJMSXliUnlGIn0.kt55Gvo7dN-xUclOleHiP-w-C16d0anM7dd7-jfDJps",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/payments",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payments denied (Joe)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJYRGFNak12c2o0VElCelpTZ2lDeDl3NEtJNkFQQm5XbyJ9.nek9vaRqjfkUkJlq3rv4BYuDgO0mcOQdio1XDobQMCo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9obiIsImlzcyI6ImtYYjNTcWc3c2VkckwzSVFnNHphVDVrTVg2THBhUHR2In0.g3XyeQuiT3iCUEnQULmQlwRwG_QwgQg6N4SoRghK88I",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:8000/payments",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Target 1 is down",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/upstreams/api.modefin.com/targets/192.168.178.24:3000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"upstreams",
+								"api.modefin.com",
+								"targets",
+								"192.168.178.24:3000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
